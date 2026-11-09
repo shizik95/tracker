@@ -1,710 +1,557 @@
- * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  -webkit-tap-highlight-color: transparent;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", Roboto, sans-serif;
-}
-
-body {
-  background-color: var(--bg-main);
-  background-image: 
-    radial-gradient(circle at 10% 0%, rgba(0, 240, 255, 0.08) 0%, transparent 45%),
-    radial-gradient(circle at 90% 20%, rgba(0, 230, 118, 0.06) 0%, transparent 40%);
-  color: var(--text-main);
-  min-height: 100vh;
-  padding-bottom: 96px;
-  overflow-x: hidden;
-  user-select: none;
-}
-
-.container {
-  max-width: 460px;
-  margin: 0 auto;
-  padding: 16px 16px 24px;
-}
-
-/* ВЕРХНЯЯ ШАПКА */
-.header-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 14px;
-}
-
-.horizon-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(14, 21, 35, 0.9);
-  border: 1px solid var(--border-cold);
-  padding: 6px 12px;
-  border-radius: 99px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--cyan);
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.horizon-pill:active {
-  transform: scale(0.96);
-}
-
-.badges-right {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-/* ОГОНЁК В СТИЛЕ TIKTOK */
-.streak-badge {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  background: linear-gradient(135deg, rgba(255, 107, 0, 0.18), rgba(255, 0, 85, 0.15));
-  border: 1px solid rgba(255, 107, 0, 0.45);
-  padding: 6px 12px;
-  border-radius: 99px;
-  font-weight: 700;
-  font-size: 13px;
-  color: #ff9e44;
-  box-shadow: 0 0 15px rgba(255, 107, 0, 0.2);
-}
-
-.flame-icon {
-  display: inline-block;
-  animation: flamePulse 1.4s infinite alternate ease-in-out;
-  filter: drop-shadow(0 0 6px #ff5500);
-}
-
-@keyframes flamePulse {
-  0% { transform: scale(1) rotate(-3deg); }
-  100% { transform: scale(1.18) rotate(3deg); }
-}
-
-.star-badge {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  background: rgba(251, 191, 36, 0.12);
-  border: 1px solid rgba(251, 191, 36, 0.35);
-  padding: 6px 12px;
-  border-radius: 99px;
-  font-weight: 700;
-  font-size: 13px;
-  color: var(--gold);
-}
-
-/* БЛОК ДАТЫ И КОЛЬЦА ПРОЦЕНТОВ */
-.hero-card {
-  background: var(--bg-card);
-  backdrop-filter: blur(16px);
-  border: 1px solid var(--border-cold);
-  border-radius: 22px;
-  padding: 18px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 14px;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
-}
-
-.hero-left .greeting {
-  font-size: 11px;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  color: var(--text-sub);
-  margin-bottom: 4px;
-  font-weight: 600;
-}
-
-.hero-left .date-title {
-  font-size: 22px;
-  font-weight: 800;
-  color: var(--text-main);
-  margin-bottom: 8px;
-}
-
-.daily-stars-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--emerald);
-  background: var(--emerald-dim);
-  padding: 4px 10px;
-  border-radius: 8px;
-}
-
-/* КРУГОВОЙ ПРОГРЕСС-БАР (%) */
-.ring-wrap {
-  position: relative;
-  width: 78px;
-  height: 78px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.ring-svg {
-  transform: rotate(-90deg);
-  width: 78px;
-  height: 78px;
-}
-
-.ring-bg {
-  fill: none;
-  stroke: rgba(255, 255, 255, 0.07);
-  stroke-width: 7;
-}
-
-.ring-meter {
-  fill: none;
-  stroke: url(#cyanGrad);
-  stroke-width: 7;
-  stroke-linecap: round;
-  stroke-dasharray: 201;
-  stroke-dashoffset: 201;
-  transition: stroke-dashoffset 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-  filter: drop-shadow(0 0 6px rgba(0, 240, 255, 0.5));
-}
-
-.ring-label {
-  position: absolute;
-  text-align: center;
-}
-
-.ring-percent {
-  font-size: 17px;
-  font-weight: 800;
-  color: var(--text-main);
-  line-height: 1;
-}
-
-.ring-sub {
-  font-size: 9px;
-  color: var(--text-sub);
-  text-transform: uppercase;
-  margin-top: 2px;
-}
-
-/* ДВА ГЛАВНЫХ ВИДЖЕТА: РЕЖИМ СНА И НАМАЗ */
-.widgets-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 14px;
-}
-
-.widget-box {
-  background: var(--bg-card);
-  border: 1px solid var(--border-cold);
-  border-radius: 18px;
-  padding: 14px;
- relative;
-  overflow: hidden;
-  transition: 0.2s;
-}
-
-.widget-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-}
-
-.widget-tag {
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  color: var(--cyan);
-}
-
-.widget-edit-btn {
-  background: rgba(255, 255, 255, 0.06);
-  border: none;
-  color: var(--text-sub);
-  font-size: 11px;
-  padding: 3px 7px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.widget-main-val {
-  font-size: 16px;
-  font-weight: 800;
-  color: var(--text-main);
-  margin-bottom: 4px;
-}
-
-.widget-sub-val {
-  font-size: 11px;
-  color: var(--text-sub);
-  line-height: 1.35;
-}
-
-/* 5 ГАЛОЧЕК НАМАЗА ВНУТРИ ВИДЖЕТА */
-.namaz-pills {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 4px;
-  margin-top: 10px;
-}
-
-.namaz-step {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  padding: 5px 2px;
-  text-align: center;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.namaz-step.done {
-  background: var(--emerald-dim);
-  border-color: var(--emerald);
-  color: var(--emerald);
-  box-shadow: 0 0 8px rgba(0, 230, 118, 0.25);
-}
-
-.namaz-step-name {
-  font-size: 9px;
-  font-weight: 700;
-  display: block;
-}
-
-.namaz-step-time {
-  font-size: 8px;
-  opacity: 0.75;
-  display: block;
-  margin-top: 1px;
-}
-
-/* БИРЖЕВОЙ ГРАФИК ДИСЦИПЛИНЫ (TRADING VIEW STYLE) */
-.chart-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-cold);
-  border-radius: 20px;
-  padding: 16px;
-  margin-bottom: 14px;
-}
-
-.chart-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.chart-title {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--text-sub);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.ticker-Delta {
-  font-size: 12px;
-  font-weight: 800;
-  padding: 3px 8px;
-  border-radius: 6px;
-  background: var(--emerald-dim);
-  color: var(--emerald);
-}
-
-.chart-svg-wrap {
-  width: 100%;
-  height: 95px;
-  position: relative;
-}
-
-/* СЕТКА ПРИВЫЧЕК ДНЯ */
-.section-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-cold);
-  border-radius: 20px;
-  padding: 16px;
-  margin-bottom: 14px;
-}
-
-.section-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-}
-
-.section-title {
-  font-size: 15px;
-  font-weight: 700;
-}
-
-.habits-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 9px;
-}
-
-.habit-item {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 14px;
-  padding: 12px 11px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-  transition: all 0.22s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.habit-item:active {
-  transform: scale(0.97);
-}
-
-.habit-item.completed {
-  background: linear-gradient(135deg, rgba(0, 240, 255, 0.14), rgba(0, 230, 118, 0.1));
-  border-color: var(--cyan);
-  box-shadow: 0 0 16px rgba(0, 240, 255, 0.15);
-}
-
-.check-circle {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  border: 2px solid var(--text-muted);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  font-size: 12px;
-  font-weight: 900;
-  color: transparent;
-  transition: 0.2s;
-}
-
-.habit-item.completed .check-circle {
-  background: var(--cyan);
-  border-color: var(--cyan);
-  color: #040811;
-  box-shadow: 0 0 10px var(--cyan);
-}
-
-.habit-name {
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 1.2;
-  color: var(--text-main);
-}
-
-/* ДОБАВЛЕНИЕ ЗАДАЧИ ИЛИ ЗАМЕТКИ */
-.input-row {
-  display: flex;
-  gap: 8px;
-  margin-top: 12px;
-}
-
-.cold-input {
-  flex: 1;
-  background: rgba(6, 9, 15, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 11px 13px;
-  color: var(--text-main);
-  font-size: 13px;
-  outline: none;
-}
-
-.cold-input:focus {
-  border-color: var(--cyan);
-}
-
-.btn-plus {
-  background: var(--cyan-dim);
-  border: 1px solid var(--border-active);
-  color: var(--cyan);
-  width: 42px;
-  border-radius: 12px;
- font-size: 20px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-/* ГЕНЕРАТОР ВЫЗОВА ДНЯ */
-.challenge-box {
-  background: linear-gradient(145deg, rgba(0, 240, 255, 0.1), rgba(14, 21, 35, 0.95));
-  border: 1px solid var(--border-active);
-  border-radius: 20px;
-  padding: 18px;
-  margin-bottom: 14px;
-}
-
-.btn-primary {
-  width: 100%;
-  background: linear-gradient(90deg, #00c6ff, #0072ff);
-  border: none;
-  color: #fff;
-  font-weight: 700;
-  font-size: 14px;
-  padding: 12px;
-  border-radius: 12px;
-  margin-top: 12px;
-  cursor: pointer;
-  box-shadow: 0 6px 20px rgba(0, 198, 255, 0.3);
-}
-
-.btn-primary:active {
-  transform: scale(0.98);
-}
-
-/* НИЖНЯЯ НАВИГАЦИЯ */
-.bottom-nav {
-  position: fixed;
-  bottom: 14px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: calc(100% - 32px);
-  max-width: 428px;
-  background: rgba(10, 15, 26, 0.92);
-  backdrop-filter: blur(20px);
-  border: 1px solid var(--border-cold);
-  border-radius: 20px;
-  display: flex;
-  justify-content: space-around;
-  padding: 8px;
-  z-index: 100;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.65);
-}
-
-.nav-tab {
-  flex: 1;
-  text-align: center;
-  padding: 8px 4px;
-  border-radius: 14px;
-  color: var(--text-muted);
-  font-size: 11px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.nav-tab.active {
-  background: var(--cyan-dim);
-  color: var(--cyan);
-}
-
-.tab-page {
-  display: none;
-  animation: fadeIn 0.25s ease;
-}
-
-.tab-page.active {
-  display: block;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ВСПЛЫВАЮЩАЯ АНИМАЦИЯ ЗВЁЗД */
-.floating-star {
-  position: fixed;
-  pointer-events: none;
-  font-weight: 800;
-  font-size: 16px;
-  color: var(--gold);
-  text-shadow: 0 0 12px rgba(251, 191, 36, 0.8);
-  z-index: 999;
-  animation: floatUp 0.95s ease-out forwards;
-}
-
-@keyframes floatUp {
-  0% { opacity: 1; transform: translateY(0) scale(0.9); }
-  100% { opacity: 0; transform: translateY(-55px) scale(1.25); }
-}
-
-/* МОДАЛЬНОЕ ОКНО НАСТРОЕК ВИДЖЕТОВ */
-.modal-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(6px);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  z-index: 500;
-}
-
-.modal-backdrop.open {
-  display: flex;
-}
-
-.modal-card {
-  background: var(--bg-card-solid);
-  border: 1px solid var(--border-active);
-  border-radius: 22px;
-  width: 100%;
-  max-width: 360px;
-  padding: 20px;
-}
-
-.modal-title {
-  font-size: 17px;
-  font-weight: 800;
-  margin-bottom: 14px;
-}
-
-.form-label {
-  font-size: 12px;
-  color: var(--text-sub);
-  display: block;
-  margin: 10px 0 5px;
-}
-<!-- КАРТОЧКА ПРОГРЕССА И ПРОЦЕНТОВ -->
-<div class="hero-card">
-  <div class="hero-left">
-    <div class="greeting" id="greetingText">Холодный фокус</div>
-    <div class="date-title" id="currentDateText">Понедельник</div>
-    <div class="daily-stars-pill">
-      <span>За сегодня:</span>
-      <strong id="todayStarsText">0 / 10 ⭐</strong>
+ <!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Путь к вершине — Дисциплина и Режим</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    :root {
+      --bg-main: #06090f;
+      --bg-card: rgba(14, 21, 35, 0.82);
+      --bg-card-solid: #0e1523;
+      --border-cold: rgba(56, 189, 248, 0.16);
+      --border-active: rgba(0, 240, 255, 0.45);
+      --cyan: #00f0ff;
+      --cyan-dim: rgba(0, 240, 255, 0.12);
+      --emerald: #00e676;
+      --emerald-dim: rgba(0, 230, 118, 0.14);
+      --crimson: #ff3366;
+      --gold: #fbbf24;
+      --text-main: #f1f5f9;
+      --text-muted: #64748b;
+      --text-sub: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", Roboto, sans-serif; }
+    body {
+      background-color: var(--bg-main);
+      background-image: radial-gradient(circle at 10% 0%, rgba(0, 240, 255, 0.08) 0%, transparent 45%), radial-gradient(circle at 90% 20%, rgba(0, 230, 118, 0.06) 0%, transparent 40%);
+      color: var(--text-main);
+      min-height: 100vh;
+      padding-bottom: 96px;
+      overflow-x: hidden;
+      user-select: none;
+    }
+    .container { max-width: 460px; margin: 0 auto; padding: 16px 16px 24px; }
+    .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+    .horizon-pill { display: inline-flex; align-items: center; gap: 6px; background: rgba(14, 21, 35, 0.9); border: 1px solid var(--border-cold); padding: 6px 12px; border-radius: 99px; font-size: 12px; font-weight: 600; color: var(--cyan); cursor: pointer; }
+    .badges-right { display: flex; align-items: center; gap: 8px; }
+    .streak-badge { display: flex; align-items: center; gap: 5px; background: linear-gradient(135deg, rgba(255, 107, 0, 0.18), rgba(255, 0, 85, 0.15)); border: 1px solid rgba(255, 107, 0, 0.45); padding: 6px 12px; border-radius: 99px; font-weight: 700; font-size: 13px; color: #ff9e44; box-shadow: 0 0 15px rgba(255, 107, 0, 0.2); }
+    .flame-icon { display: inline-block; animation: flamePulse 1.4s infinite alternate ease-in-out; }
+    @keyframes flamePulse { 0% { transform: scale(1) rotate(-3deg); } 100% { transform: scale(1.18) rotate(3deg); } }
+    .star-badge { display: flex; align-items: center; gap: 5px; background: rgba(251, 191, 36, 0.12); border: 1px solid rgba(251, 191, 36, 0.35); padding: 6px 12px; border-radius: 99px; font-weight: 700; font-size: 13px; color: var(--gold); }
+    .hero-card { background: var(--bg-card); backdrop-filter: blur(16px); border: 1px solid var(--border-cold); border-radius: 22px; padding: 18px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45); }
+    .greeting { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--text-sub); margin-bottom: 4px; font-weight: 600; }
+    .date-title { font-size: 21px; font-weight: 800; margin-bottom: 8px; }
+    .daily-stars-pill { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--emerald); background: var(--emerald-dim); padding: 4px 10px; border-radius: 8px; }
+    .ring-wrap { position: relative; width: 78px; height: 78px; display: flex; align-items: center; justify-content: center; }
+    .ring-svg { transform: rotate(-90deg); width: 78px; height: 78px; }
+    .ring-bg { fill: none; stroke: rgba(255, 255, 255, 0.07); stroke-width: 7; }
+    .ring-meter { fill: none; stroke: url(#cyanGrad); stroke-width: 7; stroke-linecap: round; stroke-dasharray: 201; stroke-dashoffset: 201; transition: stroke-dashoffset 0.5s ease; }
+    .ring-label { position: absolute; text-align: center; }
+    .ring-percent { font-size: 16px; font-weight: 800; line-height: 1; }
+    .ring-sub { font-size: 9px; color: var(--text-sub); margin-top: 2px; }
+    .widgets-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+    .widget-box { background: var(--bg-card); border: 1px solid var(--border-cold); border-radius: 18px; padding: 14px; }
+    .widget-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    .widget-tag { font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--cyan); }
+    .widget-edit-btn { background: rgba(255, 255, 255, 0.07); border: none; color: var(--text-sub); font-size: 11px; padding: 3px 7px; border-radius: 6px; cursor: pointer; }
+    .widget-main-val { font-size: 15px; font-weight: 800; margin-bottom: 4px; }
+    .widget-sub-val { font-size: 11px; color: var(--text-sub); line-height: 1.35; }
+    .namaz-pills { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; margin-top: 10px; }
+    .namaz-step { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 5px 2px; text-align: center; cursor: pointer; }
+    .namaz-step.done { background: var(--emerald-dim); border-color: var(--emerald); color: var(--emerald); }
+    .namaz-step-name { font-size: 9px; font-weight: 700; display: block; }
+    .namaz-step-time { font-size: 8px; opacity: 0.75; display: block; margin-top: 1px; }
+    .chart-card, .section-card { background: var(--bg-card); border: 1px solid var(--border-cold); border-radius: 20px; padding: 16px; margin-bottom: 14px; }
+    .chart-header, .section-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .chart-title { font-size: 13px; font-weight: 700; color: var(--text-sub); }
+    .ticker-Delta { font-size: 12px; font-weight: 800; padding: 3px 8px; border-radius: 6px; background: var(--emerald-dim); color: var(--emerald); }
+    .section-title { font-size: 15px; font-weight: 700; }
+    .habits-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+    .habit-item { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; padding: 12px 11px; display: flex; align-items: center; gap: 10px; cursor: pointer; transition: 0.2s; }
+    .habit-item.completed { background: linear-gradient(135deg, rgba(0, 240, 255, 0.14), rgba(0, 230, 118, 0.1)); border-color: var(--cyan); }
+    .check-circle { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--text-muted); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 12px; font-weight: 900; color: transparent; }
+    .habit-item.completed .check-circle { background: var(--cyan); border-color: var(--cyan); color: #040811; }
+    .habit-name { font-size: 13px; font-weight: 600; line-height: 1.2; }
+    .input-row { display: flex; gap: 8px; margin-top: 12px; }
+    .cold-input { flex: 1; background: rgba(6, 9, 15, 0.85); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 12px; padding: 11px 13px; color: var(--text-main); font-size: 13px; outline: none; }
+    .btn-plus { background: var(--cyan-dim); border: 1px solid var(--border-active); color: var(--cyan); width: 42px; border-radius: 12px; font-size: 20px; font-weight: 700; cursor: pointer; }
+    .challenge-box { background: linear-gradient(145deg, rgba(0, 240, 255, 0.1), rgba(14, 21, 35, 0.95)); border: 1px solid var(--border-active); border-radius: 20px; padding: 18px; margin-bottom: 14px; }
+    .btn-primary { width: 100%; background: linear-gradient(90deg, #00c6ff, #0072ff); border: none; color: #fff; font-weight: 700; font-size: 14px; padding: 12px; border-radius: 12px; margin-top: 12px; cursor: pointer; }
+    .bottom-nav { position: fixed; bottom: 14px; left: 50%; transform: translateX(-50%); width: calc(100% - 32px); max-width: 428px; background: rgba(10, 15, 26, 0.94); backdrop-filter: blur(20px); border: 1px solid var(--border-cold); border-radius: 20px; display: flex; justify-content: space-around; padding: 8px; z-index: 100; }
+    .nav-tab { flex: 1; text-align: center; padding: 8px 4px; border-radius: 14px; color: var(--text-muted); font-size: 11px; font-weight: 600; cursor: pointer; }
+    .nav-tab.active { background: var(--cyan-dim); color: var(--cyan); }
+    .tab-page { display: none; }
+    .tab-page.active { display: block; }
+    .floating-star { position: fixed; pointer-events: none; font-weight: 800; font-size: 16px; color: var(--gold); z-index: 999; animation: floatUp 0.9s ease-out forwards; }
+    @keyframes floatUp { 0% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; transform: translateY(-50px); } }
+    .modal-backdrop { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.78); display: none; align-items: center; justify-content: center; padding: 20px; z-index: 500; }
+    .modal-backdrop.open { display: flex; }
+    .modal-card { background: var(--bg-card-solid); border: 1px solid var(--border-active); border-radius: 22px; width: 100%; max-width: 360px; padding: 20px; }
+    .modal-title { font-size: 17px; font-weight: 800; margin-bottom: 12px; }
+    .form-label { font-size: 12px; color: var(--text-sub); display: block; margin: 10px 0 5px; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="header-top">
+    <div class="horizon-pill" onclick="openHorizonModal()">
+      <span>🎯 Цель:</span> <span id="horizonText">1 год</span> <span>✎</span>
+    </div>
+    <div class="badges-right">
+      <div class="streak-badge"><span class="flame-icon">🔥</span> <span id="streakCount">1</span> дн.</div>
+      <div class="star-badge"><span>⭐</span> <span id="totalStars">0</span></div>
     </div>
   </div>
 
-  <div class="ring-wrap">
-    <svg class="ring-svg" viewBox="0 0 78 78">
-      <defs>
-        <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#00f0ff" />
-          <stop offset="100%" stop-color="#00e676" />
-        </linearGradient>
-      </defs>
-      <circle class="ring-bg" cx="39" cy="39" r="32"></circle>
-      <circle class="ring-meter" id="progressRing" cx="39" cy="39" r="32"></circle>
-    </svg>
-    <div class="ring-label">
-      <div class="ring-percent" id="ringPercentText">0%</div>
-      <div class="ring-sub" id="ringCountText">0/0</div>
+  <div id="tab-main" class="tab-page active">
+    <div class="hero-card">
+      <div>
+        <div class="greeting" id="greetingText">Холодный фокус</div>
+        <div class="date-title" id="currentDateText">Сегодня</div>
+        <div class="daily-stars-pill"><span>За сегодня:</span> <strong id="todayStarsText">0 / 10 ⭐</strong></div>
+      </div>
+      <div class="ring-wrap">
+        <svg class="ring-svg" viewBox="0 0 78 78">
+          <defs>
+            <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#00f0ff" />
+              <stop offset="100%" stop-color="#00e676" />
+            </linearGradient>
+          </defs>
+          <circle class="ring-bg" cx="39" cy="39" r="32"></circle>
+          <circle class="ring-meter" id="progressRing" cx="39" cy="39" r="32"></circle>
+        </svg>
+        <div class="ring-label">
+          <div class="ring-percent" id="ringPercentText">0%</div>
+          <div class="ring-sub" id="ringCountText">0/0</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="widgets-grid">
+      <div class="widget-box">
+        <div class="widget-header">
+          <span class="widget-tag">🌙 Режим сна</span>
+          <button class="widget-edit-btn" onclick="openSleepModal()">Время</button>
+        </div>
+        <div class="widget-main-val" id="sleepCountdown">-- ч -- мин</div>
+        <div class="widget-sub-val" id="sleepScheduleText">Подъём: 08:00 · Отбой: 23:00</div>
+      </div>
+      <div class="widget-box">
+        <div class="widget-header">
+          <span class="widget-tag" id="namazCityTag">🕋 Москва</span>
+          <button class="widget-edit-btn" onclick="openNamazModal()">Город</button>
+        </div>
+        <div class="widget-main-val" id="nextNamazCountdown">Загрузка...</div>
+        <div class="widget-sub-val" id="nextNamazName">Выполнено: 0 из 5</div>
+        <div class="namaz-pills" id="namazPillsContainer"></div>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-header">
+        <div class="chart-title">📈 Индекс Дисциплины (Биржа)</div>
+        <div class="ticker-Delta" id="chartDeltaBadge">+0.0%</div>
+      </div>
+      <svg id="tradingChart" width="100%" height="95" viewBox="0 0 360 95" preserveAspectRatio="none"></svg>
+    </div>
+
+    <div class="section-card">
+      <div class="section-head">
+        <span class="section-title">⚡ Ежедневные задачи</span>
+        <span style="font-size:11px; color:var(--text-sub);">+2 ⭐ · 100% = 10 ⭐</span>
+      </div>
+      <div class="habits-grid" id="habitsContainer"></div>
+      <div class="input-row">
+        <input type="text" id="newHabitInput" class="cold-input" placeholder="Добавить задачу (напр. Коран, Бег)..." />
+        <button class="btn-plus" onclick="addNewHabit()">+</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="tab-dreams" class="tab-page">
+    <div class="challenge-box">
+      <div style="display:flex; justify-content:space-between;">
+        <span style="font-size:11px; font-weight:800; color:var(--cyan);">⚡ ВЫЗОВ ДНЯ</span>
+        <span style="font-size:12px; font-weight:700; color:var(--gold);">+3 ⭐ БОНУС</span>
+      </div>
+      <div id="challengeText" style="font-size:15px; font-weight:700; margin:10px 0 6px;">
+        Прочитай сегодня на 5 страниц книги больше обычного и убери телефон за 30 минут до сна.
+      </div>
+      <div id="challengeQuote" style="font-size:12px; color:var(--text-sub); font-style:italic;">
+        «Дисциплина — это мост между целями и достижениями».
+      </div>
+      <div style="display:flex; gap:8px;">
+        <button class="btn-primary" id="completeChallengeBtn" onclick="completeDailyChallenge()">Выполнить (+3 ⭐)</button>
+        <button class="btn-primary" style="background:rgba(255,255,255,0.08); width:45%;" onclick="generateNewChallenge()">Другой ↻</button>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-head">
+        <span class="section-title">🚀 Мои Мечты и Цели</span>
+        <span class="horizon-pill" onclick="openHorizonModal()" id="dreamsHorizonBadge">1 год ✎</span>
+      </div>
+      <div id="dreamsList" style="display:flex; flex-direction:column; gap:8px;"></div>
+      <div class="input-row">
+        <input type="text" id="newDreamInput" class="cold-input" placeholder="Записать глобальную цель или мечту..." />
+        <button class="btn-plus" onclick="addDream()">+</button>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-head"><span class="section-title">📝 Заметки для мотивации</span></div>
+      <textarea id="quickNotesArea" class="cold-input" style="width:100%; min-height:110px;" placeholder="Запиши свои мысли и планы..." oninput="saveQuickNotes()"></textarea>
+    </div>
+  </div>
+
+  <div id="tab-profile" class="tab-page">
+    <div class="section-card" style="text-align:center; padding:24px 16px;">
+      <div style="width:68px; height:68px; border-radius:50%; background:linear-gradient(135deg, var(--cyan), var(--emerald)); margin:0 auto 10px; display:flex; align-items:center; justify-content:center; font-size:26px; font-weight:800; color:#040811;" id="avatarInitials">С</div>
+      <h2 id="profileName" style="font-size:20px; font-weight:800;">Салах</h2>
+      <div id="profileRank" style="display:inline-block; margin-top:6px; padding:4px 12px; border-radius:99px; background:var(--cyan-dim); color:var(--cyan); font-size:12px; font-weight:700;">Ранг: Архитектор Режима</div>
+      <p id="profileBio" style="font-size:13px; color:var(--text-sub); margin-top:10px;">Иду к своей цели без оправданий.</p>
+    </div>
+
+    <div class="section-card">
+      <label class="form-label">Твой Никнейм</label>
+      <input type="text" id="inputProfileName" class="cold-input" style="width:100%;" oninput="updateProfileData()" />
+      <label class="form-label">Статус / Резюме</label>
+      <input type="text" id="inputProfileBio" class="cold-input" style="width:100%;" oninput="updateProfileData()" />
+      <button class="btn-primary" style="background:rgba(255,51,102,0.16); border:1px solid var(--crimson); color:var(--crimson);" onclick="simulateMissedPenalty()">Штраф за пропуск (-2 ⭐)</button>
     </div>
   </div>
 </div>
 
-<!-- ДВА УМНЫХ ВИДЖЕТА: СОН/ПОДЪЁМ + НАМАЗ 5 РАЗ ПО ГОРОДУ -->
-<div class="widgets-grid">
-  <!-- Виджет Режима Сна -->
-  <div class="widget-box">
-    <div class="widget-header">
-      <span class="widget-tag">🌙 Режим сна</span>
-      <button class="widget-edit-btn" onclick="openSleepModal()">Изменить</button>
-    </div>
-    <div class="widget-main-val" id="sleepCountdown">-- ч -- мин</div>
- <div class="widget-sub-val" id="sleepScheduleText">Подъём: 08:00 · Отбой: 23:00</div>
-  </div>
+<div class="bottom-nav">
+  <div class="nav-tab active" onclick="switchTab('main', this)">⚡ Терминал</div>
+  <div class="nav-tab" onclick="switchTab('dreams', this)">🚀 Мечты</div>
+  <div class="nav-tab" onclick="switchTab('profile', this)">👤 Профиль</div>
+</div>
 
-  <!-- Виджет Намаза -->
-  <div class="widget-box">
-    <div class="widget-header">
-      <span class="widget-tag" id="namazCityTag">🕋 Москва</span>
-      <button class="widget-edit-btn" onclick="openNamazModal()">Город</button>
-    </div>
-    <div class="widget-main-val" id="nextNamazCountdown">Загрузка...</div>
-    <div class="widget-sub-val" id="nextNamazName">5 обязательных намазов</div>
-    
-    <!-- 5 галочек намаза -->
-    <div class="namaz-pills" id="namazPillsContainer"></div>
+<div class="modal-backdrop" id="sleepModal">
+  <div class="modal-card">
+    <div class="modal-title">🌙 Настройка режима</div>
+    <label class="form-label">Время подъёма</label>
+    <input type="time" id="wakeTimeInput" class="cold-input" style="width:100%;" />
+    <label class="form-label">Время отбоя (сна)</label>
+    <input type="time" id="bedTimeInput" class="cold-input" style="width:100%;" />
+    <button class="btn-primary" onclick="saveSleepSettings()">Сохранить</button>
   </div>
 </div>
 
-<!-- БИРЖЕВОЙ ГРАФИК РОСТА ДИСЦИПЛИНЫ -->
-<div class="chart-card">
-  <div class="chart-header">
-    <div class="chart-title">
-      <span>📈 Индекс Дисциплины (Биржа привычек)</span>
-    </div>
-    <div class="ticker-Delta" id="chartDeltaBadge">+0.0%</div>
-  </div>
-  <div class="chart-svg-wrap">
-    <svg id="tradingChart" width="100%" height="95" viewBox="0 0 360 95" preserveAspectRatio="none"></svg>
+<div class="modal-backdrop" id="namazModal">
+  <div class="modal-card">
+    <div class="modal-title">🕋 Город для намаза</div>
+    <label class="form-label">Введи свой город</label>
+    <input type="text" id="cityInput" class="cold-input" style="width:100%;" placeholder="Москва, Грозный, Дубай..." />
+    <button class="btn-primary" onclick="saveCityAndFetchNamaz()">Обновить время</button>
   </div>
 </div>
 
-<!-- ПРИВЫЧКИ ДНЯ -->
-<div class="section-card">
-  <div class="section-head">
-    <span class="section-title">⚡ Ежедневные нормативы</span>
-    <span style="font-size:11px; color:var(--text-sub);">+2 ⭐ за норму · 100% = 10 ⭐</span>
-  </div>
-  <div class="habits-grid" id="habitsContainer"></div>
-
-  <!-- Быстрое добавление новой привычки -->
-  <div class="input-row">
-    <input type="text" id="newHabitInput" class="cold-input" placeholder="Добавить привычку (напр. 50 отжиманий)..." />
-    <button class="btn-plus" onclick="addNewHabit()">+</button>
-  </div>
-</div>
-<!-- ГЕНЕРАТОР ЕЖЕДНЕВНОГО ВЫЗОВА -->
-<div class="challenge-box">
-  <div style="display:flex; justify-content:space-between; align-items:center;">
-    <span style="font-size:11px; font-weight:800; color:var(--cyan); text-transform:uppercase;">⚡ Спецзадание на основе твоих целей</span>
-    <span style="font-size:12px; font-weight:700; color:var(--gold);">+3 ⭐ БОНУС</span>
-  </div>
-  <div id="challengeText" style="font-size:15px; font-weight:700; margin:10px 0 6px; line-height:1.4;">
-    Прочитай сегодня на 5 страниц книги больше обычного и убери телефон за 30 минут до отбоя.
-  </div>
-  <div id="challengeQuote" style="font-size:12px; color:var(--text-sub); font-style:italic;">
-    «Дисциплина — это решение делать то, чего очень не хочется делать, чтобы достичь того, чего очень хочется достичь».
-  </div>
-  <div style="display:flex; gap:8px;">
-    <button class="btn-primary" id="completeChallengeBtn" onclick="completeDailyChallenge()">Выполнить вызов (+3 ⭐)</button>
-    <button class="btn-primary" style="background:rgba(255,255,255,0.08); box-shadow:none; width:45%;" onclick="generateNewChallenge()">Обновить ↻</button>
+<div class="modal-backdrop" id="horizonModal">
+  <div class="modal-card">
+    <div class="modal-title">🎯 Срок твоей цели</div>
+    <label class="form-label">За какой срок хочешь измениться?</label>
+    <input type="text" id="horizonInput" class="cold-input" style="width:100%;" placeholder="Напр.: 1 год, 4 месяца..." />
+    <button class="btn-primary" onclick="saveHorizon()">Сохранить</button>
   </div>
 </div>
 
-<!-- МОИ МЕЧТЫ И ГЛОБАЛЬНЫЕ ЦЕЛИ -->
-<div class="section-card">
-  <div class="section-head">
-    <span class="section-title">🚀 Мои Мечты и Цели</span>
-    <span class="horizon-pill" onclick="openHorizonModal()" id="dreamsHorizonBadge">Срок: 1 год ✎</span>
-  </div>
-  <p style="font-size:12px; color:var(--text-sub); margin-bottom:10px;">
-    Запиши, ради чего ты держишь этот режим. Возвращайся сюда каждый раз, когда захочется дать слабину.
-  </p>
-  <div id="dreamsList" style="display:flex; flex-direction:column; gap:8px;"></div>
-  <div class="input-row">
-    <input type="text" id="newDreamInput" class="cold-input" placeholder="Напр.: Похудеть на 4 кг, прочитать 500 стр..." />
-    <button class="btn-plus" onclick="addDream()">+</button>
-  </div>
-</div>
+<script>
+  const tg = window.Telegram?.WebApp;
+  if (tg) { tg.expand(); }
 
-<!-- БЫСТРАЯ ЗАМЕТКА -->
-<div class="section-card">
-  <div class="section-head">
-    <span class="section-title">📝 Быстрые мысли и заметки</span>
-  </div>
-  <textarea id="quickNotesArea" class="cold-input" style="width:100%; min-height:110px; resize:none;" placeholder="Мысль, идея, расписание или важный инсайт за день..." oninput="saveQuickNotes()"></textarea>
-</div>
-<div class="section-card">
-  <div class="section-head">
-    <span class="section-title">⚙️ Настройки личности и штрафов</span>
-  </div>
-  <label class="form-label">Твой Никнейм</label>
- <input type="text" id="inputProfileName" class="cold-input" style="width:100%;" oninput="updateProfileData()" />
+  const defaultState = {
+    name: tg?.initDataUnsafe?.user?.first_name || 'Салах',
+    bio: 'Дисциплина бьёт мотивацию.',
+    horizon: '1 год',
+    streak: 5,
+    totalStars: 20,
+    todayStars: 0,
+    dailyBonusClaimed: false,
+    challengeDone: false,
+    wakeTime: '08:00',
+    bedTime: '23:00',
+    city: 'Москва',
+    namazTimes: { Fajr: '05:15', Dhuhr: '12:35', Asr: '15:45', Maghrib: '18:20', Isha: '20:05' },
+    namazDone: [false, false, false, false, false],
+    habits: [
+      { id: 1, name: 'Намаз 5/5 вовремя', done: false, isNamazLinked: true },
+      { id: 2, name: 'Прочитать Коран', done: false },
+      { id: 3, name: 'Прочитать книгу', done: false },
+      { id: 4, name: 'Тренировка', done: false },
+      { id: 5, name: 'Пробежка', done: false },
+      { id: 6, name: 'Режим сна и подъёма', done: false }
+    ],
+    dreams: ['Похудеть на 4 кг и держать форму', 'Прочитать 500 страниц книги', 'Не пропускать намаз и режим сна'],
+    quickNotes: '',
+    chartHistory: [42, 48, 46, 54, 62, 68, 72]
+  };
 
-  <label class="form-label">Твой Статус / Резюме цели</label>
-  <input type="text" id="inputProfileBio" class="cold-input" style="width:100%;" oninput="updateProfileData()" />
+  let state = JSON.parse(localStorage.getItem('prime_tracker_v3')) || defaultState;
+  function saveState() { localStorage.setItem('prime_tracker_v3', JSON.stringify(state)); }
 
-  <div style="margin-top:16px; display:flex; gap:8px;">
-    <button class="btn-primary" style="background:rgba(255, 51, 102, 0.16); border:1px solid var(--crimson); color:var(--crimson); box-shadow:none;" onclick="simulateMissedPenalty()">
-      Проверка штрафа (-2 ⭐ за пропуск)
-    </button>
-  </div>
-</div>
+  function updateHeaderDate() {
+    const now = new Date();
+    const days = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+    const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+    document.getElementById('currentDateText').textContent = `${days[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]}`;
+  }
+
+  function updateSleepWidget() {
+    document.getElementById('sleepScheduleText').textContent = `Подъём: ${state.wakeTime} · Отбой: ${state.bedTime}`;
+    const now = new Date();
+    const [bedH, bedM] = state.bedTime.split(':').map(Number);
+    const target = new Date();
+    target.setHours(bedH, bedM, 0, 0);
+    if (target <= now) target.setDate(target.getDate() + 1);
+    const diffMs = target - now;
+    const diffHrs = Math.floor(diffMs / 3600000);
+    const diffMins = Math.floor((diffMs % 3600000) / 60000);
+    document.getElementById('sleepCountdown').textContent = `До сна: ${diffHrs} ч ${diffMins} мин`;
+  }
+
+  const namazLabels = [
+    { key: 'Fajr', short: 'Фаджр' },
+    { key: 'Dhuhr', short: 'Зухр' },
+    { key: 'Asr', short: 'Аср' },
+    { key: 'Maghrib', short: 'Магриб' },
+    { key: 'Isha', short: 'Иша' }
+  ];
+
+  function renderNamazWidget() {
+    document.getElementById('namazCityTag').textContent = `🕋 ${state.city}`;
+    const container = document.getElementById('namazPillsContainer');
+    container.innerHTML = '';
+    namazLabels.forEach((item, idx) => {
+      const pill = document.createElement('div');
+      pill.className = `namaz-step ${state.namazDone[idx] ? 'done' : ''}`;
+      pill.innerHTML = `<span class="namaz-step-name">${item.short}</span><span class="namaz-step-time">${state.namazTimes[item.key]}</span>`;
+      pill.onclick = (e) => toggleNamazStep(idx, e);
+      container.appendChild(pill);
+    });
+
+    const now = new Date();
+    let nextPrayer = namazLabels[0], nextDiff = Infinity;
+    for (let item of namazLabels) {
+      const [h, m] = state.namazTimes[item.key].split(':').map(Number);
+      const pDate = new Date(); pDate.setHours(h, m, 0, 0);
+      if (pDate > now && (pDate - now) < nextDiff) { nextDiff = pDate - now; nextPrayer = item; }
+    }
+    if (nextDiff === Infinity) {
+      const [h, m] = state.namazTimes['Fajr'].split(':').map(Number);
+      const pDate = new Date(); pDate.setDate(pDate.getDate() + 1); pDate.setHours(h, m, 0, 0);
+      nextDiff = pDate - now;
+    }
+    const hrs = Math.floor(nextDiff / 3600000), mins = Math.floor((nextDiff % 3600000) / 60000);
+    document.getElementById('nextNamazCountdown').textContent = `${nextPrayer.short}: через ${hrs}ч ${mins}м`;
+    document.getElementById('nextNamazName').textContent = `Сделано: ${state.namazDone.filter(Boolean).length} из 5`;
+  }
+
+  function toggleNamazStep(idx, event) {
+    state.namazDone[idx] = !state.namazDone[idx];
+    const allFive = state.namazDone.every(Boolean);
+    const namazHabit = state.habits.find(h => h.isNamazLinked);
+    if (namazHabit && namazHabit.done !== allFive) toggleHabit(namazHabit.id, event, true);
+    saveState(); renderNamazWidget();
+  }
+
+  async function fetchPrayerTimesByCity(city) {
+    try {
+      const res = await fetch(`https://api.aladhan.com/v1/timingsByCity?city=${encodeURIComponent(city)}&country=&method=3`);
+      const data = await res.json();
+      if (data?.data?.timings) {
+        const t = data.data.timings;
+        state.namazTimes = { Fajr: t.Fajr.slice(0,5), Dhuhr: t.Dhuhr.slice(0,5), Asr: t.Asr.slice(0,5), Maghrib: t.Maghrib.slice(0,5), Isha: t.Isha.slice(0,5) };
+        saveState(); renderNamazWidget();
+      }
+    } catch (e) {}
+  }
+
+  function spawnFloatingStar(x, y, text) {
+    const el = document.createElement('div');
+    el.className = 'floating-star';
+    el.textContent = text;
+    el.style.left = `${x - 20}px`; el.style.top = `${y - 10}px`;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 900);
+  }
+
+  function renderHabits() {
+    const container = document.getElementById('habitsContainer');
+    container.innerHTML = '';
+    state.habits.forEach(habit => {
+      const div = document.createElement('div');
+      div.className = `habit-item ${habit.done ? 'completed' : ''}`;
+      div.innerHTML = `<div class="check-circle">${habit.done ? '✓' : ''}</div><div class="habit-name">${habit.name}</div>`;
+      div.onclick = (e) => toggleHabit(habit.id, e);
+      container.appendChild(div);
+    });
+    updateProgressAndStars();
+  }
+
+  function toggleHabit(id, event, fromNamaz = false) {
+    const habit = state.habits.find(h => h.id === id);
+    if (!habit) return;
+    habit.done = !habit.done;
+    if (habit.isNamazLinked && !fromNamaz) { state.namazDone = state.namazDone.map(() => habit.done); renderNamazWidget(); }
+
+    const x = event?.clientX || window.innerWidth / 2, y = event?.clientY || window.innerHeight / 2;
+    if (habit.done) { state.totalStars += 2; spawnFloatingStar(x, y, '+2 ⭐'); }
+    else { state.totalStars = Math.max(0, state.totalStars - 2); spawnFloatingStar(x, y, '-2 ⭐'); }
+
+    const total = state.habits.length, done = state.habits.filter(h => h.done).length, base = done * 2;
+    if (total > 0 && done === total) {
+      if (!state.dailyBonusClaimed) {
+        state.totalStars += Math.max(0, 10 - base);
+        state.dailyBonusClaimed = true;
+        setTimeout(() => spawnFloatingStar(window.innerWidth / 2, 120, '🔥 100% = 10 ⭐'), 200);
+      }
+      state.todayStars = 10;
+    } else {
+      if (state.dailyBonusClaimed) {
+        state.totalStars = Math.max(0, state.totalStars - Math.max(0, 10 - total * 2));
+        state.dailyBonusClaimed = false;
+      }
+      state.todayStars = Math.min(10, base);
+    }
+    saveState(); renderHabits(); renderTradingChart();
+  }
+
+  function updateProgressAndStars() {
+    const total = state.habits.length, done = state.habits.filter(h => h.done).length;
+    const pct = total === 0 ? 0 : Math.round((done / total) * 100);
+    document.getElementById('progressRing').style.strokeDashoffset = 201 - (pct / 100) * 201;
+    document.getElementById('ringPercentText').textContent = `${pct}%`;
+    document.getElementById('ringCountText').textContent = `${done}/${total}`;
+    document.getElementById('todayStarsText').textContent = `${state.todayStars} / 10 ⭐`;
+    document.getElementById('totalStars').textContent = state.totalStars;
+    document.getElementById('streakCount').textContent = state.streak;
+    document.getElementById('horizonText').textContent = state.horizon;
+    document.getElementById('dreamsHorizonBadge').textContent = `${state.horizon} ✎`;
+    updateRankBadge();
+  }
+
+  function renderTradingChart() {
+    const svg = document.getElementById('tradingChart');
+    const total = state.habits.length || 1, done = state.habits.filter(h => h.done).length;
+    const livePoint = 45 + Math.round((done / total) * 48);
+    const pts = [...state.chartHistory.slice(0, 6), livePoint];
+    const coords = pts.map((val, i) => [i * (360 / (pts.length - 1)), 95 - ((val - 20) / 80) * 77 - 8]);
+    const linePath = coords.map((c, i) => `${i === 0 ? 'M' : 'L'} ${c[0]} ${c[1]}`).join(' ');
+    const delta = ((pts[pts.length - 1] - pts[0]) / pts[0] * 100).toFixed(1);
+    const color = delta >= 0 ? '#00e676' : '#ff3366';
+    document.getElementById('chartDeltaBadge').textContent = `${delta >= 0 ? '+' : ''}${delta}%`;
+    svg.innerHTML = `<path d="${linePath}" fill="none" stroke="${color}" stroke-width="3" stroke-linecap="round"/>`;
+  }
+
+  function addNewHabit() {
+    const inp = document.getElementById('newHabitInput');
+    if (!inp.value.trim()) return;
+    state.habits.push({ id: Date.now(), name: inp.value.trim(), done: false });
+    inp.value = ''; saveState(); renderHabits(); renderTradingChart();
+  }
+
+  function renderDreams() {
+    const list = document.getElementById('dreamsList');
+    list.innerHTML = '';
+    state.dreams.forEach((d, idx) => {
+      const item = document.createElement('div');
+      item.style.cssText = 'background:rgba(255,255,255,0.04); border:1px solid rgba(0,240,255,0.18); padding:10px 12px; border-radius:12px; display:flex; justify-content:space-between; font-size:13px;';
+      item.innerHTML = `<span>✦ ${d}</span><span style="cursor:pointer;" onclick="removeDream(${idx})">✕</span>`;
+      list.appendChild(item);
+    });
+    document.getElementById('quickNotesArea').value = state.quickNotes || '';
+  }
+
+  function addDream() {
+    const inp = document.getElementById('newDreamInput');
+    if (!inp.value.trim()) return;
+    state.dreams.push(inp.value.trim()); inp.value = ''; saveState(); renderDreams();
+  }
+  function removeDream(idx) { state.dreams.splice(idx, 1); saveState(); renderDreams(); }
+  function saveQuickNotes() { state.quickNotes = document.getElementById('quickNotesArea').value; saveState(); }
+
+  const challengesPool = [
+    { text: 'Прочитай сегодня на 10 страниц больше нормы и сделай 30 отжиманий.', quote: '«Дисциплина весит граммы, а сожаление — тонны».' },
+    { text: 'Проведи 1 час перед сном без соцсетей — только книга или Коран.', quote: '«Фокус — это валюта сильных».' },
+    { text: 'Добавь 10 минут к пробежке или тренировке на максимуме.', quote: '«Каждая победа над ленью закаляет характер».' }
+  ];
+  function generateNewChallenge() {
+    const pick = challengesPool[Math.floor(Math.random() * challengesPool.length)];
+    document.getElementById('challengeText').textContent = pick.text;
+    document.getElementById('challengeQuote').textContent = pick.quote;
+  }
+  function completeDailyChallenge() {
+    if (state.challengeDone) return;
+    state.challengeDone = true; state.totalStars += 3;
+    document.getElementById('completeChallengeBtn').textContent = '✓ Выполнено (+3 ⭐)';
+    saveState(); updateProgressAndStars();
+  }
+
+  function updateRankBadge() {
+    const s = state.totalStars;
+    const rank = s < 20 ? 'Новичок Режима' : s < 50 ? 'Холодный Фокус' : 'Железная Дисциплина';
+    document.getElementById('profileRank').textContent = `Ранг: ${rank} (${s} ⭐)`;
+    document.getElementById('profileName').textContent = state.name;
+    document.getElementById('profileBio').textContent = state.bio;
+    document.getElementById('avatarInitials').textContent = (state.name[0] || 'С').toUpperCase();
+  }
+  function updateProfileData() {
+    state.name = document.getElementById('inputProfileName').value || 'Салах';
+    state.bio = document.getElementById('inputProfileBio').value || '';
+    saveState(); updateRankBadge();
+  }
+  function simulateMissedPenalty() {
+    state.totalStars = Math.max(0, state.totalStars - 2);
+    spawnFloatingStar(window.innerWidth / 2, 120, '-2 ⭐ ШТРАФ');
+    saveState(); updateProgressAndStars();
+  }
+  function switchTab(tab, el) {
+    document.querySelectorAll('.tab-page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(`tab-${tab}`).classList.add('active');
+    el.classList.add('active');
+  }
+  function openSleepModal() {
+    document.getElementById('wakeTimeInput').value = state.wakeTime;
+    document.getElementById('bedTimeInput').value = state.bedTime;
+    document.getElementById('sleepModal').classList.add('open');
+  }
+  function saveSleepSettings() {
+    state.wakeTime = document.getElementById('wakeTimeInput').value || '08:00';
+    state.bedTime = document.getElementById('bedTimeInput').value || '23:00';
+    document.getElementById('sleepModal').classList.remove('open');
+    saveState(); updateSleepWidget();
+  }
+  function openNamazModal() {
+    document.getElementById('cityInput').value = state.city;
+    document.getElementById('namazModal').classList.add('open');
+  }
+  function saveCityAndFetchNamaz() {
+    const val = document.getElementById('cityInput').value.trim();
+    if (val) { state.city = val; fetchPrayerTimesByCity(val); }
+    document.getElementById('namazModal').classList.remove('open');
+    saveState(); renderNamazWidget();
+  }
+  function openHorizonModal() {
+    document.getElementById('horizonInput').value = state.horizon;
+    document.getElementById('horizonModal').classList.add('open');
+  }
+  function saveHorizon() {
+    const val = document.getElementById('horizonInput').value.trim();
+    if (val) state.horizon = val;
+    document.getElementById('horizonModal').classList.remove('open');
+    saveState(); updateProgressAndStars();
+  }
+
+  document.getElementById('inputProfileName').value = state.name;
+  document.getElementById('inputProfileBio').value = state.bio;
+  updateHeaderDate(); updateSleepWidget(); renderNamazWidget();
+  fetchPrayerTimesByCity(state.city); renderHabits(); renderTradingChart(); renderDreams();
+</script>
+</body>
+</html>
