@@ -1,0 +1,710 @@
+ * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", Roboto, sans-serif;
+}
+
+body {
+  background-color: var(--bg-main);
+  background-image: 
+    radial-gradient(circle at 10% 0%, rgba(0, 240, 255, 0.08) 0%, transparent 45%),
+    radial-gradient(circle at 90% 20%, rgba(0, 230, 118, 0.06) 0%, transparent 40%);
+  color: var(--text-main);
+  min-height: 100vh;
+  padding-bottom: 96px;
+  overflow-x: hidden;
+  user-select: none;
+}
+
+.container {
+  max-width: 460px;
+  margin: 0 auto;
+  padding: 16px 16px 24px;
+}
+
+/* ВЕРХНЯЯ ШАПКА */
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.horizon-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(14, 21, 35, 0.9);
+  border: 1px solid var(--border-cold);
+  padding: 6px 12px;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--cyan);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.horizon-pill:active {
+  transform: scale(0.96);
+}
+
+.badges-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ОГОНЁК В СТИЛЕ TIKTOK */
+.streak-badge {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: linear-gradient(135deg, rgba(255, 107, 0, 0.18), rgba(255, 0, 85, 0.15));
+  border: 1px solid rgba(255, 107, 0, 0.45);
+  padding: 6px 12px;
+  border-radius: 99px;
+  font-weight: 700;
+  font-size: 13px;
+  color: #ff9e44;
+  box-shadow: 0 0 15px rgba(255, 107, 0, 0.2);
+}
+
+.flame-icon {
+  display: inline-block;
+  animation: flamePulse 1.4s infinite alternate ease-in-out;
+  filter: drop-shadow(0 0 6px #ff5500);
+}
+
+@keyframes flamePulse {
+  0% { transform: scale(1) rotate(-3deg); }
+  100% { transform: scale(1.18) rotate(3deg); }
+}
+
+.star-badge {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(251, 191, 36, 0.12);
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  padding: 6px 12px;
+  border-radius: 99px;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--gold);
+}
+
+/* БЛОК ДАТЫ И КОЛЬЦА ПРОЦЕНТОВ */
+.hero-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border-cold);
+  border-radius: 22px;
+  padding: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+}
+
+.hero-left .greeting {
+  font-size: 11px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--text-sub);
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+.hero-left .date-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 8px;
+}
+
+.daily-stars-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--emerald);
+  background: var(--emerald-dim);
+  padding: 4px 10px;
+  border-radius: 8px;
+}
+
+/* КРУГОВОЙ ПРОГРЕСС-БАР (%) */
+.ring-wrap {
+  position: relative;
+  width: 78px;
+  height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ring-svg {
+  transform: rotate(-90deg);
+  width: 78px;
+  height: 78px;
+}
+
+.ring-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.07);
+  stroke-width: 7;
+}
+
+.ring-meter {
+  fill: none;
+  stroke: url(#cyanGrad);
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-dasharray: 201;
+  stroke-dashoffset: 201;
+  transition: stroke-dashoffset 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  filter: drop-shadow(0 0 6px rgba(0, 240, 255, 0.5));
+}
+
+.ring-label {
+  position: absolute;
+  text-align: center;
+}
+
+.ring-percent {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1;
+}
+
+.ring-sub {
+  font-size: 9px;
+  color: var(--text-sub);
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+/* ДВА ГЛАВНЫХ ВИДЖЕТА: РЕЖИМ СНА И НАМАЗ */
+.widgets-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.widget-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border-cold);
+  border-radius: 18px;
+  padding: 14px;
+ relative;
+  overflow: hidden;
+  transition: 0.2s;
+}
+
+.widget-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.widget-tag {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--cyan);
+}
+
+.widget-edit-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: none;
+  color: var(--text-sub);
+  font-size: 11px;
+  padding: 3px 7px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.widget-main-val {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 4px;
+}
+
+.widget-sub-val {
+  font-size: 11px;
+  color: var(--text-sub);
+  line-height: 1.35;
+}
+
+/* 5 ГАЛОЧЕК НАМАЗА ВНУТРИ ВИДЖЕТА */
+.namaz-pills {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 4px;
+  margin-top: 10px;
+}
+
+.namaz-step {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 5px 2px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.namaz-step.done {
+  background: var(--emerald-dim);
+  border-color: var(--emerald);
+  color: var(--emerald);
+  box-shadow: 0 0 8px rgba(0, 230, 118, 0.25);
+}
+
+.namaz-step-name {
+  font-size: 9px;
+  font-weight: 700;
+  display: block;
+}
+
+.namaz-step-time {
+  font-size: 8px;
+  opacity: 0.75;
+  display: block;
+  margin-top: 1px;
+}
+
+/* БИРЖЕВОЙ ГРАФИК ДИСЦИПЛИНЫ (TRADING VIEW STYLE) */
+.chart-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-cold);
+  border-radius: 20px;
+  padding: 16px;
+  margin-bottom: 14px;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.chart-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-sub);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ticker-Delta {
+  font-size: 12px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: var(--emerald-dim);
+  color: var(--emerald);
+}
+
+.chart-svg-wrap {
+  width: 100%;
+  height: 95px;
+  position: relative;
+}
+
+/* СЕТКА ПРИВЫЧЕК ДНЯ */
+.section-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-cold);
+  border-radius: 20px;
+  padding: 16px;
+  margin-bottom: 14px;
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.habits-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+}
+
+.habit-item {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 12px 11px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.habit-item:active {
+  transform: scale(0.97);
+}
+
+.habit-item.completed {
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.14), rgba(0, 230, 118, 0.1));
+  border-color: var(--cyan);
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.15);
+}
+
+.check-circle {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 900;
+  color: transparent;
+  transition: 0.2s;
+}
+
+.habit-item.completed .check-circle {
+  background: var(--cyan);
+  border-color: var(--cyan);
+  color: #040811;
+  box-shadow: 0 0 10px var(--cyan);
+}
+
+.habit-name {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--text-main);
+}
+
+/* ДОБАВЛЕНИЕ ЗАДАЧИ ИЛИ ЗАМЕТКИ */
+.input-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.cold-input {
+  flex: 1;
+  background: rgba(6, 9, 15, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 11px 13px;
+  color: var(--text-main);
+  font-size: 13px;
+  outline: none;
+}
+
+.cold-input:focus {
+  border-color: var(--cyan);
+}
+
+.btn-plus {
+  background: var(--cyan-dim);
+  border: 1px solid var(--border-active);
+  color: var(--cyan);
+  width: 42px;
+  border-radius: 12px;
+ font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ГЕНЕРАТОР ВЫЗОВА ДНЯ */
+.challenge-box {
+  background: linear-gradient(145deg, rgba(0, 240, 255, 0.1), rgba(14, 21, 35, 0.95));
+  border: 1px solid var(--border-active);
+  border-radius: 20px;
+  padding: 18px;
+  margin-bottom: 14px;
+}
+
+.btn-primary {
+  width: 100%;
+  background: linear-gradient(90deg, #00c6ff, #0072ff);
+  border: none;
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 12px;
+  border-radius: 12px;
+  margin-top: 12px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0, 198, 255, 0.3);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+/* НИЖНЯЯ НАВИГАЦИЯ */
+.bottom-nav {
+  position: fixed;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  max-width: 428px;
+  background: rgba(10, 15, 26, 0.92);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border-cold);
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-around;
+  padding: 8px;
+  z-index: 100;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.65);
+}
+
+.nav-tab {
+  flex: 1;
+  text-align: center;
+  padding: 8px 4px;
+  border-radius: 14px;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.nav-tab.active {
+  background: var(--cyan-dim);
+  color: var(--cyan);
+}
+
+.tab-page {
+  display: none;
+  animation: fadeIn 0.25s ease;
+}
+
+.tab-page.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ВСПЛЫВАЮЩАЯ АНИМАЦИЯ ЗВЁЗД */
+.floating-star {
+  position: fixed;
+  pointer-events: none;
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--gold);
+  text-shadow: 0 0 12px rgba(251, 191, 36, 0.8);
+  z-index: 999;
+  animation: floatUp 0.95s ease-out forwards;
+}
+
+@keyframes floatUp {
+  0% { opacity: 1; transform: translateY(0) scale(0.9); }
+  100% { opacity: 0; transform: translateY(-55px) scale(1.25); }
+}
+
+/* МОДАЛЬНОЕ ОКНО НАСТРОЕК ВИДЖЕТОВ */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 500;
+}
+
+.modal-backdrop.open {
+  display: flex;
+}
+
+.modal-card {
+  background: var(--bg-card-solid);
+  border: 1px solid var(--border-active);
+  border-radius: 22px;
+  width: 100%;
+  max-width: 360px;
+  padding: 20px;
+}
+
+.modal-title {
+  font-size: 17px;
+  font-weight: 800;
+  margin-bottom: 14px;
+}
+
+.form-label {
+  font-size: 12px;
+  color: var(--text-sub);
+  display: block;
+  margin: 10px 0 5px;
+}
+<!-- КАРТОЧКА ПРОГРЕССА И ПРОЦЕНТОВ -->
+<div class="hero-card">
+  <div class="hero-left">
+    <div class="greeting" id="greetingText">Холодный фокус</div>
+    <div class="date-title" id="currentDateText">Понедельник</div>
+    <div class="daily-stars-pill">
+      <span>За сегодня:</span>
+      <strong id="todayStarsText">0 / 10 ⭐</strong>
+    </div>
+  </div>
+
+  <div class="ring-wrap">
+    <svg class="ring-svg" viewBox="0 0 78 78">
+      <defs>
+        <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#00f0ff" />
+          <stop offset="100%" stop-color="#00e676" />
+        </linearGradient>
+      </defs>
+      <circle class="ring-bg" cx="39" cy="39" r="32"></circle>
+      <circle class="ring-meter" id="progressRing" cx="39" cy="39" r="32"></circle>
+    </svg>
+    <div class="ring-label">
+      <div class="ring-percent" id="ringPercentText">0%</div>
+      <div class="ring-sub" id="ringCountText">0/0</div>
+    </div>
+  </div>
+</div>
+
+<!-- ДВА УМНЫХ ВИДЖЕТА: СОН/ПОДЪЁМ + НАМАЗ 5 РАЗ ПО ГОРОДУ -->
+<div class="widgets-grid">
+  <!-- Виджет Режима Сна -->
+  <div class="widget-box">
+    <div class="widget-header">
+      <span class="widget-tag">🌙 Режим сна</span>
+      <button class="widget-edit-btn" onclick="openSleepModal()">Изменить</button>
+    </div>
+    <div class="widget-main-val" id="sleepCountdown">-- ч -- мин</div>
+ <div class="widget-sub-val" id="sleepScheduleText">Подъём: 08:00 · Отбой: 23:00</div>
+  </div>
+
+  <!-- Виджет Намаза -->
+  <div class="widget-box">
+    <div class="widget-header">
+      <span class="widget-tag" id="namazCityTag">🕋 Москва</span>
+      <button class="widget-edit-btn" onclick="openNamazModal()">Город</button>
+    </div>
+    <div class="widget-main-val" id="nextNamazCountdown">Загрузка...</div>
+    <div class="widget-sub-val" id="nextNamazName">5 обязательных намазов</div>
+    
+    <!-- 5 галочек намаза -->
+    <div class="namaz-pills" id="namazPillsContainer"></div>
+  </div>
+</div>
+
+<!-- БИРЖЕВОЙ ГРАФИК РОСТА ДИСЦИПЛИНЫ -->
+<div class="chart-card">
+  <div class="chart-header">
+    <div class="chart-title">
+      <span>📈 Индекс Дисциплины (Биржа привычек)</span>
+    </div>
+    <div class="ticker-Delta" id="chartDeltaBadge">+0.0%</div>
+  </div>
+  <div class="chart-svg-wrap">
+    <svg id="tradingChart" width="100%" height="95" viewBox="0 0 360 95" preserveAspectRatio="none"></svg>
+  </div>
+</div>
+
+<!-- ПРИВЫЧКИ ДНЯ -->
+<div class="section-card">
+  <div class="section-head">
+    <span class="section-title">⚡ Ежедневные нормативы</span>
+    <span style="font-size:11px; color:var(--text-sub);">+2 ⭐ за норму · 100% = 10 ⭐</span>
+  </div>
+  <div class="habits-grid" id="habitsContainer"></div>
+
+  <!-- Быстрое добавление новой привычки -->
+  <div class="input-row">
+    <input type="text" id="newHabitInput" class="cold-input" placeholder="Добавить привычку (напр. 50 отжиманий)..." />
+    <button class="btn-plus" onclick="addNewHabit()">+</button>
+  </div>
+</div>
+<!-- ГЕНЕРАТОР ЕЖЕДНЕВНОГО ВЫЗОВА -->
+<div class="challenge-box">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <span style="font-size:11px; font-weight:800; color:var(--cyan); text-transform:uppercase;">⚡ Спецзадание на основе твоих целей</span>
+    <span style="font-size:12px; font-weight:700; color:var(--gold);">+3 ⭐ БОНУС</span>
+  </div>
+  <div id="challengeText" style="font-size:15px; font-weight:700; margin:10px 0 6px; line-height:1.4;">
+    Прочитай сегодня на 5 страниц книги больше обычного и убери телефон за 30 минут до отбоя.
+  </div>
+  <div id="challengeQuote" style="font-size:12px; color:var(--text-sub); font-style:italic;">
+    «Дисциплина — это решение делать то, чего очень не хочется делать, чтобы достичь того, чего очень хочется достичь».
+  </div>
+  <div style="display:flex; gap:8px;">
+    <button class="btn-primary" id="completeChallengeBtn" onclick="completeDailyChallenge()">Выполнить вызов (+3 ⭐)</button>
+    <button class="btn-primary" style="background:rgba(255,255,255,0.08); box-shadow:none; width:45%;" onclick="generateNewChallenge()">Обновить ↻</button>
+  </div>
+</div>
+
+<!-- МОИ МЕЧТЫ И ГЛОБАЛЬНЫЕ ЦЕЛИ -->
+<div class="section-card">
+  <div class="section-head">
+    <span class="section-title">🚀 Мои Мечты и Цели</span>
+    <span class="horizon-pill" onclick="openHorizonModal()" id="dreamsHorizonBadge">Срок: 1 год ✎</span>
+  </div>
+  <p style="font-size:12px; color:var(--text-sub); margin-bottom:10px;">
+    Запиши, ради чего ты держишь этот режим. Возвращайся сюда каждый раз, когда захочется дать слабину.
+  </p>
+  <div id="dreamsList" style="display:flex; flex-direction:column; gap:8px;"></div>
+  <div class="input-row">
+    <input type="text" id="newDreamInput" class="cold-input" placeholder="Напр.: Похудеть на 4 кг, прочитать 500 стр..." />
+    <button class="btn-plus" onclick="addDream()">+</button>
+  </div>
+</div>
+
+<!-- БЫСТРАЯ ЗАМЕТКА -->
+<div class="section-card">
+  <div class="section-head">
+    <span class="section-title">📝 Быстрые мысли и заметки</span>
+  </div>
+  <textarea id="quickNotesArea" class="cold-input" style="width:100%; min-height:110px; resize:none;" placeholder="Мысль, идея, расписание или важный инсайт за день..." oninput="saveQuickNotes()"></textarea>
+</div>
+<div class="section-card">
+  <div class="section-head">
+    <span class="section-title">⚙️ Настройки личности и штрафов</span>
+  </div>
+  <label class="form-label">Твой Никнейм</label>
+ <input type="text" id="inputProfileName" class="cold-input" style="width:100%;" oninput="updateProfileData()" />
+
+  <label class="form-label">Твой Статус / Резюме цели</label>
+  <input type="text" id="inputProfileBio" class="cold-input" style="width:100%;" oninput="updateProfileData()" />
+
+  <div style="margin-top:16px; display:flex; gap:8px;">
+    <button class="btn-primary" style="background:rgba(255, 51, 102, 0.16); border:1px solid var(--crimson); color:var(--crimson); box-shadow:none;" onclick="simulateMissedPenalty()">
+      Проверка штрафа (-2 ⭐ за пропуск)
+    </button>
+  </div>
+</div>
